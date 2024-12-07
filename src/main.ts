@@ -17,7 +17,7 @@ const devEnv = {
 
 const app = new App();
 
-new MyStack(app, 'ps-infrastructure-dev', { env: devEnv });
-// new MyStack(app, 'ps-infrastructure-prod', { env: prodEnv });
+new MyStack(app, 'advanced-aws-cdk-dev', { env: devEnv });
+// new MyStack(app, 'advanced-aws-cdk-prod', { env: prodEnv });
 
 app.synth();

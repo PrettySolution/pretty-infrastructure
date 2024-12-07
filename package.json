@@ -1,5 +1,5 @@
 {
-  "name": "ps-infrastructure",
+  "name": "advanced-aws-cdk",
   "scripts": {
     "build": "npx projen build",
     "bundle": "npx projen bundle",
