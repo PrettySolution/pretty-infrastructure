@@ -1,4 +1,5 @@
 import { awscdk } from 'projen';
+
 const project = new awscdk.AwsCdkTypeScriptApp({
   cdkVersion: '2.171.1',
   defaultReleaseBranch: 'main',
@@ -11,4 +12,13 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
 });
+
+const hello = project.addTask('hello');
+hello.exec('echo hello!');
+
+const world = project.addTask('world');
+world.spawn(hello);
+world.exec('echo world!');
+
 project.synth();
+

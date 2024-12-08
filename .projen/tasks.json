@@ -127,6 +127,14 @@
         }
       ]
     },
+    "hello": {
+      "name": "hello",
+      "steps": [
+        {
+          "exec": "echo hello!"
+        }
+      ]
+    },
     "install": {
       "name": "install",
       "description": "Install project dependencies and update lockfile (non-frozen)",
@@ -239,6 +247,17 @@
         },
         {
           "exec": "cdk watch"
+        }
+      ]
+    },
+    "world": {
+      "name": "world",
+      "steps": [
+        {
+          "spawn": "hello"
+        },
+        {
+          "exec": "echo world!"
         }
       ]
     }

@@ -43,3 +43,34 @@ export class MediaTranscodingTrigger extends Construct {
 
 ##### Don'ts
  - Don't have directories with more them 5 files in them
+
+### Projen
+![projen](docs/img/projen-synth.png)
+```shell
+projen new awscdk-app-ts                # AWS CDK app in TypeScript.
+cdk init app --language typescript ./   # cdk equivalent to projen
+```
+```typescript
+// .projenrc.ts
+const project = new awscdk.AwsCdkTypeScriptApp({
+    cdkVersion: '2.79.0',
+    defaultReleaseBranch: 'main',
+    name: 'advanced-aws-cdk',
+    projenicTs: true,
+    deps: [
+        '@matthewbonig/state-machine'
+    ]
+});
+```
+```typescript
+// .projenrc.ts
+const pnpmProject = new awscdk.AwsCdkTypeScriptApp({
+    // ...
+    packageManager: NodePackageManager.PNPM,
+});
+// OR
+const npmProject = new awscdk.AwsCdkTypeScriptApp({
+    // ...
+    packageManager: NodePackageManager.NPM,
+});
+```
