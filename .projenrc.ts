@@ -6,7 +6,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   name: 'advanced-aws-cdk',
   projenrcTs: true,
   gitignore: ['.idea'],
-
+  release: true,
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: ['cdk-dia'], /* Build dependencies for this module. */
