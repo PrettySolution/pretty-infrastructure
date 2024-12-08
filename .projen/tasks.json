@@ -127,6 +127,14 @@
         }
       ]
     },
+    "hello": {
+      "name": "hello",
+      "steps": [
+        {
+          "exec": "echo hello!"
+        }
+      ]
+    },
     "install": {
       "name": "install",
       "description": "Install project dependencies and update lockfile (non-frozen)",
@@ -214,13 +222,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,cdk-dia,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript aws-cdk-lib constructs"
+          "exec": "yarn upgrade @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk cdk-dia esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"
@@ -239,6 +247,17 @@
         },
         {
           "exec": "cdk watch"
+        }
+      ]
+    },
+    "world": {
+      "name": "world",
+      "steps": [
+        {
+          "spawn": "hello"
+        },
+        {
+          "exec": "echo world!"
         }
       ]
     }

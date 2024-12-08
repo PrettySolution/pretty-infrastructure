@@ -11,6 +11,7 @@
     "diff": "npx projen diff",
     "eject": "npx projen eject",
     "eslint": "npx projen eslint",
+    "hello": "npx projen hello",
     "package": "npx projen package",
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",
@@ -21,6 +22,7 @@
     "test:watch": "npx projen test:watch",
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
+    "world": "npx projen world",
     "projen": "npx projen"
   },
   "devDependencies": {
@@ -30,6 +32,7 @@
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "aws-cdk": "^2.171.1",
+    "cdk-dia": "^0.11.0",
     "esbuild": "^0.24.0",
     "eslint": "^9",
     "eslint-import-resolver-typescript": "^3.7.0",
