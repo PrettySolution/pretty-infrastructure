@@ -20,7 +20,7 @@
 │   └── frontend
 │       └── WebsiteStack.ts
 └── stages
-    └── AppStack.ts
+    └── AppStage.ts
 ```
 
 ##### Do's
