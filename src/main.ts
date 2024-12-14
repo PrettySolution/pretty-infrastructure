@@ -1,13 +1,6 @@
-import { App, Stack, StackProps } from 'aws-cdk-lib';
-import { Construct } from 'constructs';
+import { App } from 'aws-cdk-lib';
+import { AdvancedPipeline } from './advanced-pipeline';
 
-export class MyStack extends Stack {
-  constructor(scope: Construct, id: string, props: StackProps = {}) {
-    super(scope, id, props);
-
-    // define resources here...
-  }
-}
 
 // for development, use account/region from cdk cli
 const devEnv = {
@@ -17,7 +10,6 @@ const devEnv = {
 
 const app = new App();
 
-new MyStack(app, 'advanced-aws-cdk-dev', { env: devEnv });
-// new MyStack(app, 'advanced-aws-cdk-prod', { env: prodEnv });
+new AdvancedPipeline(app, 'advanced-pipeline', { env: devEnv });
 
 app.synth();
