@@ -30,7 +30,7 @@
   "devDependencies": {
     "@stylistic/eslint-plugin": "^2",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.10.1",
+    "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "aws-cdk": "^2.171.1",
@@ -42,7 +42,7 @@
     "eslint-plugin-import": "^2.31.0",
     "jest": "^29.7.0",
     "jest-junit": "^15",
-    "projen": "^0.90.6",
+    "projen": "^0.91.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
