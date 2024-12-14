@@ -5,12 +5,12 @@ import { CloudFrontDistributionStack } from '../stacks/CloudFrontDistributionSta
 import { WebSiteStack } from '../stacks/WebSiteStack';
 
 
-interface MyAppGitHubStageProps extends GitHubStageProps {
+interface MyAppStageProps extends GitHubStageProps {
   env: ThisEnvironment;
 }
 
-export class MyAppGitHubStage extends GitHubStage {
-  constructor(scope: Construct, id: string, props: MyAppGitHubStageProps) {
+export class MyAppStage extends GitHubStage {
+  constructor(scope: Construct, id: string, props: MyAppStageProps) {
     super(scope, id, props);
 
     const dist = new CloudFrontDistributionStack(this, 'CloudFrontDistribution', {

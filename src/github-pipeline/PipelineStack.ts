@@ -2,11 +2,11 @@ import { Stack, StackProps } from 'aws-cdk-lib';
 import { ShellStep } from 'aws-cdk-lib/pipelines';
 import { AwsCredentials, GitHubWorkflow } from 'cdk-pipelines-github';
 import { Construct } from 'constructs';
+import { MyAppStage } from './MyAppStage';
 import { GH_SUPPORT_DEPLOY_ROLE_NAME, PRIMARY_REGION, PROD_ACCOUNT } from '../constants';
-import { MyAppGitHubStage } from '../stages/MyAppGitHubStage';
 
 
-export class GithubPipelineStack extends Stack {
+export class PipelineStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
 
@@ -22,7 +22,7 @@ export class GithubPipelineStack extends Stack {
       }),
     });
 
-    const prod = new MyAppGitHubStage(this, 'prod', {
+    const prod = new MyAppStage(this, 'prod', {
       env: {
         account: PROD_ACCOUNT,
         region: PRIMARY_REGION,
