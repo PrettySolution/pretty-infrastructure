@@ -7,10 +7,10 @@ import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
-import { MyEnvironment } from '../interfaces';
+import { ThisEnvironment } from '../interfaces';
 
 interface CloudFrontDistributionStackProps extends StackProps {
-  env: MyEnvironment;
+  env: ThisEnvironment;
 }
 
 export class CloudFrontDistributionStack extends Stack {

@@ -1,1 +1,6 @@
-{}
+{
+  "hosted-zone:account=268591637005:domainName=pretty-solution.com:region=us-east-1": {
+    "Id": "/hostedzone/Z10192151DC69L8V6P0VH",
+    "Name": "pretty-solution.com."
+  }
+}

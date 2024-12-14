@@ -1,5 +1,5 @@
 import { Environment } from 'aws-cdk-lib';
 
-export interface MyEnvironment extends Environment {
+export interface ThisEnvironment extends Environment {
   domainName: string;
 }
