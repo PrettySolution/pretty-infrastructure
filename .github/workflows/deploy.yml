@@ -203,31 +203,15 @@ jobs:
         name: Publish Assets-FileAsset6
         run: /bin/bash
           ./cdk.out/assembly-github-pipeline-prod/publish-Assets-FileAsset6-step.sh
-  prod-CloneWebsiteRepo:
-    name: CloneWebsiteRepo
-    permissions:
-      id-token: read
-      contents: read
-    runs-on: ubuntu-latest
-    needs:
-      - Build-Build
-    env: {}
-    steps:
-      - name: Clone pretty-solution-website
-        uses: actions/checkout@v4
-        with:
-          repository: pretty-solution/pretty-solution-website
-          path: ../pretty-solution-website
-          ref: refs/heads/main
   prod-CloudFrontDistribution-Deploy:
     name: Deploy githubpipelineprodCloudFrontDistributionC415D866
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: read
       id-token: write
     needs:
       - Build-Build
       - Assets-FileAsset1
-      - prod-CloneWebsiteRepo
     runs-on: ubuntu-latest
     steps:
       - name: Authenticate Via OIDC Role
@@ -258,13 +242,13 @@ jobs:
           role-arn: arn:aws:iam::268591637005:role/cdk-hnb659fds-cfn-exec-role-268591637005-us-east-1
   prod-s3-Deploy:
     name: Deploy githubpipelineprods3B5B62FD8
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: read
       id-token: write
     needs:
       - Build-Build
       - Assets-FileAsset2
-      - prod-CloneWebsiteRepo
     runs-on: ubuntu-latest
     steps:
       - name: Authenticate Via OIDC Role
@@ -295,6 +279,7 @@ jobs:
           role-arn: arn:aws:iam::268591637005:role/cdk-hnb659fds-cfn-exec-role-268591637005-us-east-1
   prod-WebSite-Deploy:
     name: Deploy githubpipelineprodWebSite9E9DE61B
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: read
       id-token: write
@@ -305,7 +290,6 @@ jobs:
       - Assets-FileAsset5
       - Assets-FileAsset6
       - prod-CloudFrontDistribution-Deploy
-      - prod-CloneWebsiteRepo
     runs-on: ubuntu-latest
     steps:
       - name: Authenticate Via OIDC Role
