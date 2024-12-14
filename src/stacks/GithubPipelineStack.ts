@@ -3,7 +3,7 @@ import { ShellStep } from 'aws-cdk-lib/pipelines';
 import { AwsCredentials, GitHubWorkflow } from 'cdk-pipelines-github';
 import { Construct } from 'constructs';
 
-export class AdvancedPipeline extends Stack {
+export class GithubPipelineStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
 
@@ -15,7 +15,7 @@ export class AdvancedPipeline extends Stack {
         ],
       }),
       awsCreds: AwsCredentials.fromOpenIdConnect({
-        gitHubActionRoleArn: `arn:aws:iam::${process.env.CDK_DEFAULT_ACCOUNT_ID}:role/PrettySolutionGithubSupport-UploadRole`,
+        gitHubActionRoleArn: `arn:aws:iam::${process.env.PS_ACCOUNT_ID || process.env.CDK_DEFAULT_ACCOUNT_ID}:role/GithubSupport-UploadRole`,
       }),
     });
   }

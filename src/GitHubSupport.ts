@@ -5,16 +5,12 @@ import { GitHubSupportStack } from './stacks/GitHubSupportStack';
 
 const app = new App();
 
-new GitHubSupportStack(app, 'PrettySolutionGithubSupport', {
+new GitHubSupportStack(app, 'GithubSupport', {
   env: {
-    account: process.env.CDK_DEFAULT_ACCOUT_ID, // prettysolution aws account
+    account: process.env.CDK_DEFAULT_ACCOUT_ID,
     region: PRIMARY_REGION,
   },
+  description: 'GithubSupport for pretty-solution/advanced-aws-cdk',
 });
-// new GitHubSupportStack(app, 'ProdGithubSupport', {
-//   env: {
-//     account: PROD_ACCOUNT,
-//     region: PRIMARY_REGION,
-//   },
-// });
+
 app.synth();

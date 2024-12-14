@@ -1,5 +1,5 @@
 import { GithubActionsIdentityProvider, GithubActionsRole } from 'aws-cdk-github-oidc';
-import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
+import { Stack, StackProps } from 'aws-cdk-lib';
 import { ManagedPolicy } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 
@@ -15,15 +15,17 @@ export class GitHubSupportStack extends Stack {
       'GithubProvider',
     );
 
-    const deployRole = new GithubActionsRole(this, 'UploadRole', {
+    const deployRole = new GithubActionsRole(this, 'DeployRole', {
+      roleName: 'GithubSupport-DeployRole',
       provider: provider,
       owner: 'pretty-solution',
       repo: 'advanced-aws-cdk',
     });
     deployRole.addManagedPolicy(ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess'));
 
-    new CfnOutput(this, 'DeployRole', {
-      value: deployRole.roleArn,
-    });
+    // todo: security
+    // new CfnOutput(this, 'DeployRole', {
+    //   value: deployRole.roleArn,
+    // });
   }
 }
