@@ -21,6 +21,7 @@ export class GitHubSupportStack extends Stack {
       provider: provider,
       repos: [
         'pretty-solution/advanced-aws-cdk',
+        'pretty-solution/pretty-solution-website',
       ],
     });
 
