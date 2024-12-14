@@ -1,7 +1,7 @@
 // src/GithubSupport.ts
 import { App } from 'aws-cdk-lib';
-import { PRIMARY_REGION, PROD_ACCOUNT } from './constants';
-import { GitHubSupportStack } from './stacks/GitHubSupportStack';
+import { PRIMARY_REGION, PROD_ACCOUNT } from '../constants';
+import { GitHubSupportStack } from './GitHubSupportStack';
 
 const app = new App();
 

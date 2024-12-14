@@ -1,9 +1,10 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { ShellStep } from 'aws-cdk-lib/pipelines';
-import { AwsCredentials, GitHubWorkflow } from 'cdk-pipelines-github';
+import { AwsCredentials, GitHubActionStep, GitHubWorkflow, JobPermission } from 'cdk-pipelines-github';
 import { Construct } from 'constructs';
 import { GH_SUPPORT_DEPLOY_ROLE_NAME, PRIMARY_REGION, PROD_ACCOUNT } from '../constants';
-import { WebSiteStage } from '../stages/WebSiteStage';
+import { MyAppGitHubStage } from '../stages/MyAppGitHubStage';
+
 
 export class GithubPipelineStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
@@ -21,11 +22,28 @@ export class GithubPipelineStack extends Stack {
       }),
     });
 
-    pipeline.addStage(new WebSiteStage(this, 'prod', {
+    pipeline.addStageWithGitHubOptions(new MyAppGitHubStage(this, 'prod', {
       env: {
         account: PROD_ACCOUNT,
         region: PRIMARY_REGION,
+        domainName: 'pretty-solution.com',
       },
-    }));
+
+    }), {
+      pre: [new GitHubActionStep('CloneWebsiteRepo', {
+        permissions: { idToken: JobPermission.READ, contents: JobPermission.READ },
+        jobSteps: [
+          {
+            name: 'Clone pretty-solution-website',
+            uses: 'actions/checkout@v4',
+            with: {
+              repository: 'pretty-solution/pretty-solution-website',
+              path: '../pretty-solution-website',
+              ref: 'refs/heads/main',
+            },
+          },
+        ],
+      })],
+    });
   }
 }

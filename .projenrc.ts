@@ -21,7 +21,7 @@ const baseAppCommand: string =
   'cdk -a "npx ts-node -P tsconfig.json --prefer-ts-exts';
 
 project.addTask('cdk:github', {
-  exec: `${baseAppCommand} src/GithubSupport.ts"`,
+  exec: `${baseAppCommand} src/gh-support/main.ts"`,
   receiveArgs: true,
 });
 
