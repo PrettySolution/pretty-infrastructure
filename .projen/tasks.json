@@ -50,7 +50,7 @@
       "name": "cdk:github",
       "steps": [
         {
-          "exec": "cdk -a \"npx ts-node -P tsconfig.json --prefer-ts-exts src/gh-support/main.ts\"",
+          "exec": "cdk -a \"npx ts-node -P tsconfig.json --prefer-ts-exts src/gh-support-app/main.ts\"",
           "receiveArgs": true
         }
       ]
