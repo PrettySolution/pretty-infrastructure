@@ -45,6 +45,7 @@ export class CloudFrontDistributionStack extends Stack {
       certificate: cert,
       errorResponses: [
         { httpStatus: 404, responseHttpStatus: 200, responsePagePath: '/index.html', ttl: Duration.minutes(5) },
+        { httpStatus: 403, responseHttpStatus: 200, responsePagePath: '/index.html', ttl: Duration.minutes(5) },
       ],
     });
 
