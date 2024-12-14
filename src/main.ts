@@ -1,5 +1,5 @@
 import { App } from 'aws-cdk-lib';
-import { GithubPipelineStack } from './stacks/GithubPipelineStack';
+import { GithubPipelineStack } from './gh-support/GithubPipelineStack';
 
 
 // for development, use account/region from cdk cli
