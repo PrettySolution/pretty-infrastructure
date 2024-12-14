@@ -1,14 +1,15 @@
+import path from 'node:path';
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { Distribution } from 'aws-cdk-lib/aws-cloudfront';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
-import { MyEnvironment } from '../interfaces';
+import { ThisEnvironment } from '../interfaces';
 
 
 interface WebSiteStackProps extends StackProps {
-  env: MyEnvironment;
+  env: ThisEnvironment;
 }
 
 
@@ -24,7 +25,7 @@ export class WebSiteStack extends Stack {
 
     new BucketDeployment(this, 'BucketDeployment', {
       sources: [
-        Source.asset('../pretty-solution-website'),
+        Source.asset(path.join(process.cwd(), 'website')),
       ],
       destinationBucket: webSiteBucket,
       distributionPaths: ['/*'],

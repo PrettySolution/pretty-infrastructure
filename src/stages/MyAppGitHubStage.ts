@@ -1,13 +1,13 @@
 import { GitHubStage, GitHubStageProps } from 'cdk-pipelines-github';
 import { Construct } from 'constructs';
-import { MyEnvironment } from '../interfaces';
+import { ThisEnvironment } from '../interfaces';
 import { CloudFrontDistributionStack } from '../stacks/CloudFrontDistributionStack';
 import { MyS3Stack } from '../stacks/MyS3Stack';
 import { WebSiteStack } from '../stacks/WebSiteStack';
 
 
 interface MyAppGitHubStageProps extends GitHubStageProps {
-  env: MyEnvironment;
+  env: ThisEnvironment;
 }
 
 export class MyAppGitHubStage extends GitHubStage {
