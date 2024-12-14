@@ -4,6 +4,7 @@
     "build": "npx projen build",
     "bump": "npx projen bump",
     "bundle": "npx projen bundle",
+    "cdk:github": "npx projen cdk:github",
     "clobber": "npx projen clobber",
     "compile": "npx projen compile",
     "default": "npx projen default",
@@ -12,7 +13,6 @@
     "diff": "npx projen diff",
     "eject": "npx projen eject",
     "eslint": "npx projen eslint",
-    "hello": "npx projen hello",
     "package": "npx projen package",
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",
@@ -25,7 +25,6 @@
     "unbump": "npx projen unbump",
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
-    "world": "npx projen world",
     "projen": "npx projen"
   },
   "devDependencies": {
@@ -49,6 +48,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "aws-cdk-github-oidc": "^2.4.1",
     "aws-cdk-lib": "^2.171.1",
     "cdk-pipelines-github": "^0.4.127",
     "constructs": "^10.0.5"

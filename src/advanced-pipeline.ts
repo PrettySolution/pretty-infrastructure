@@ -15,7 +15,7 @@ export class AdvancedPipeline extends Stack {
         ],
       }),
       awsCreds: AwsCredentials.fromOpenIdConnect({
-        gitHubActionRoleArn: 'arn:aws:iam::<account-id>:role/GitHubActionRole',
+        gitHubActionRoleArn: `arn:aws:iam::${process.env.CDK_DEFAULT_ACCOUNT_ID}:role/PrettySolutionGithubSupport-UploadRole`,
       }),
     });
   }
