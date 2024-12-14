@@ -46,6 +46,15 @@
       "name": "bundle",
       "description": "Prepare assets"
     },
+    "cdk:github": {
+      "name": "cdk:github",
+      "steps": [
+        {
+          "exec": "cdk -a \"npx ts-node -P tsconfig.json --prefer-ts-exts src/GithubSupport.ts\"",
+          "receiveArgs": true
+        }
+      ]
+    },
     "clobber": {
       "name": "clobber",
       "description": "hard resets to HEAD of origin and cleans the local repo",
@@ -142,14 +151,6 @@
         {
           "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools projenrc .projenrc.ts",
           "receiveArgs": true
-        }
-      ]
-    },
-    "hello": {
-      "name": "hello",
-      "steps": [
-        {
-          "exec": "echo hello!"
         }
       ]
     },
@@ -289,13 +290,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,cdk-dia,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,cdk-dia,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript,aws-cdk-github-oidc,cdk-pipelines-github"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk cdk-dia commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript aws-cdk-lib constructs"
+          "exec": "yarn upgrade @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk cdk-dia commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript aws-cdk-github-oidc aws-cdk-lib cdk-pipelines-github constructs"
         },
         {
           "exec": "npx projen"
@@ -314,17 +315,6 @@
         },
         {
           "exec": "cdk watch"
-        }
-      ]
-    },
-    "world": {
-      "name": "world",
-      "steps": [
-        {
-          "spawn": "hello"
-        },
-        {
-          "exec": "echo world!"
         }
       ]
     }

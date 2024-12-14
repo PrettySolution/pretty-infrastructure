@@ -11,18 +11,19 @@ const project = new awscdk.AwsCdkTypeScriptApp({
     projenCredentials: GithubCredentials.fromApp(),
   },
   release: true,
-  // deps: [],                /* Runtime dependencies of this module. */
+  deps: ['cdk-pipelines-github', 'aws-cdk-github-oidc'], /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: ['cdk-dia'], /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
 });
 
-const hello = project.addTask('hello');
-hello.exec('echo hello!');
+const baseAppCommand: string =
+  'cdk -a "npx ts-node -P tsconfig.json --prefer-ts-exts';
 
-const world = project.addTask('world');
-world.spawn(hello);
-world.exec('echo world!');
+project.addTask('cdk:github', {
+  exec: `${baseAppCommand} src/GithubSupport.ts"`,
+  receiveArgs: true,
+});
 
 project.synth();
 
