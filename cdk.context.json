@@ -2,5 +2,9 @@
   "hosted-zone:account=268591637005:domainName=pretty-solution.com:region=us-east-1": {
     "Id": "/hostedzone/Z10192151DC69L8V6P0VH",
     "Name": "pretty-solution.com."
+  },
+  "hosted-zone:account=277707141071:domainName=stage.pretty-solution.com:region=us-east-1": {
+    "Id": "/hostedzone/Z083840023DTUR2NELY85",
+    "Name": "stage.pretty-solution.com."
   }
 }

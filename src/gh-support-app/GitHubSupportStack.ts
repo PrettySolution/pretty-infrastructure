@@ -1,4 +1,3 @@
-import { GithubActionsIdentityProvider } from 'aws-cdk-github-oidc';
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { GitHubActionRole } from 'cdk-pipelines-github';
 import { Construct } from 'constructs';
@@ -11,14 +10,8 @@ export class GitHubSupportStack extends Stack {
   constructor(scope: Construct, id: string, props: GithubSupportProps) {
     super(scope, id, props);
 
-    const provider = GithubActionsIdentityProvider.fromAccount(
-      this,
-      'GithubProvider',
-    );
-
     new GitHubActionRole(this, 'DeployRole', {
       roleName: `${GH_SUPPORT_DEPLOY_ROLE_NAME}`,
-      provider: provider,
       repos: [
         'pretty-solution/advanced-aws-cdk',
         'pretty-solution/pretty-solution-website',
