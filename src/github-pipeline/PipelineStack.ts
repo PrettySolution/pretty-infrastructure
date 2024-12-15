@@ -30,7 +30,8 @@ export class PipelineStack extends Stack {
         domainName: 'pretty-solution.com',
       },
     });
-    pipeline.addStageWithGitHubOptions(prod, {
+    const gitHubWave = pipeline.addGitHubWave('prodWave');
+    gitHubWave.addStageWithGitHubOptions(prod, {
       jobSettings: { if: 'github.ref == \'refs/heads/main\'' },
     });
 
@@ -42,9 +43,10 @@ export class PipelineStack extends Stack {
         domainName: 'stage.pretty-solution.com',
       },
     });
-    pipeline.addStageWithGitHubOptions(stage, {
+    gitHubWave.addStageWithGitHubOptions(stage, {
       jobSettings: { if: 'github.ref == \'refs/heads/stage\'' },
     });
     pipeline.workflowFile.patch(JsonPatch.add('/on/push/branches/', 'stage'));
+
   }
 }
