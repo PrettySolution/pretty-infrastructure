@@ -11,7 +11,6 @@ export class PipelineStack extends Stack {
     super(scope, id, props);
 
     const pipeline = new GitHubWorkflow(this, 'pipeline', {
-
       synth: new ShellStep('Build', {
         commands: [
           'yarn install',
@@ -23,6 +22,7 @@ export class PipelineStack extends Stack {
       }),
     });
 
+    // PROD
     const prod = new MyAppStage(this, 'prod', {
       env: {
         account: PROD_ACCOUNT,
@@ -30,7 +30,11 @@ export class PipelineStack extends Stack {
         domainName: 'pretty-solution.com',
       },
     });
+    pipeline.addStageWithGitHubOptions(prod, {
+      jobSettings: { if: 'github.ref == \'refs/heads/main\'' },
+    });
 
+    // STAGE
     const stage = new MyAppStage(this, 'stage', {
       env: {
         account: STAGE_ACCOUNT,
@@ -38,14 +42,9 @@ export class PipelineStack extends Stack {
         domainName: 'stage.pretty-solution.com',
       },
     });
-
-    pipeline.addStageWithGitHubOptions(prod, {
-      jobSettings: { if: 'github.ref == \'refs/heads/main\'' },
-    });
     pipeline.addStageWithGitHubOptions(stage, {
       jobSettings: { if: 'github.ref == \'refs/heads/stage\'' },
     });
-
     pipeline.workflowFile.patch(JsonPatch.add('/on/push/branches/', 'stage'));
   }
 }
