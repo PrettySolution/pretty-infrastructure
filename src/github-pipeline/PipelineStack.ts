@@ -1,6 +1,6 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { ShellStep } from 'aws-cdk-lib/pipelines';
-import { AwsCredentials, GitHubWorkflow } from 'cdk-pipelines-github';
+import { AwsCredentials, GitHubWorkflow, JsonPatch } from 'cdk-pipelines-github';
 import { Construct } from 'constructs';
 import { MyAppStage } from './MyAppStage';
 import { GH_SUPPORT_DEPLOY_ROLE_NAME, PRIMARY_REGION, PROD_ACCOUNT, STAGE_ACCOUNT } from '../constants';
@@ -22,6 +22,7 @@ export class PipelineStack extends Stack {
       }),
     });
 
+    // PROD
     const prod = new MyAppStage(this, 'prod', {
       env: {
         account: PROD_ACCOUNT,
@@ -29,7 +30,11 @@ export class PipelineStack extends Stack {
         domainName: 'pretty-solution.com',
       },
     });
+    pipeline.addStageWithGitHubOptions(prod, {
+      jobSettings: { if: 'github.ref == \'refs/heads/main\'' },
+    });
 
+    // STAGE
     const stage = new MyAppStage(this, 'stage', {
       env: {
         account: STAGE_ACCOUNT,
@@ -37,12 +42,9 @@ export class PipelineStack extends Stack {
         domainName: 'stage.pretty-solution.com',
       },
     });
-
-    pipeline.addStageWithGitHubOptions(prod, {
-      jobSettings: { if: 'github.ref == \'refs/heads/main\'' },
-    });
     pipeline.addStageWithGitHubOptions(stage, {
       jobSettings: { if: 'github.ref == \'refs/heads/stage\'' },
     });
+    pipeline.workflowFile.patch(JsonPatch.add('/on/push/branches/', 'stage'));
   }
 }
