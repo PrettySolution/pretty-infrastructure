@@ -5,7 +5,7 @@ name: deploy
 on:
   push:
     branches:
-      - stage
+      - prod
       - main
   workflow_dispatch: {}
 jobs:
@@ -58,7 +58,7 @@ jobs:
       - id: Publish
         name: Publish Assets-FileAsset1
         run: /bin/bash
-          ./cdk.out/assembly-gh-pipeline-prod/publish-Assets-FileAsset1-step.sh
+          ./cdk.out/assembly-gh-pipeline-stage/publish-Assets-FileAsset1-step.sh
   Assets-FileAsset2:
     name: Publish Assets Assets-FileAsset2
     needs:
@@ -87,9 +87,9 @@ jobs:
       - id: Publish
         name: Publish Assets-FileAsset2
         run: /bin/bash
-          ./cdk.out/assembly-gh-pipeline-stage/publish-Assets-FileAsset2-step.sh
-  prodWave-prod-CloudFrontDistribution-Deploy:
-    name: Deploy ghpipelineprodCloudFrontDistribution3B7AAA0C
+          ./cdk.out/assembly-gh-pipeline-prod/publish-Assets-FileAsset2-step.sh
+  prodWave-stage-CloudFrontDistribution-Deploy:
+    name: Deploy ghpipelinestageCloudFrontDistribution96633926
     if: github.ref == 'refs/heads/main'
     permissions:
       contents: read
@@ -115,19 +115,19 @@ jobs:
           aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ env.AWS_SESSION_TOKEN }}
-          role-to-assume: arn:aws:iam::268591637005:role/cdk-hnb659fds-deploy-role-268591637005-us-east-1
+          role-to-assume: arn:aws:iam::277707141071:role/cdk-hnb659fds-deploy-role-277707141071-us-east-1
           role-external-id: Pipeline
       - id: Deploy
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: prod-CloudFrontDistribution
-          template: https://cdk-hnb659fds-assets-268591637005-us-east-1.s3.us-east-1.amazonaws.com/${{
+          name: stage-CloudFrontDistribution
+          template: https://cdk-hnb659fds-assets-277707141071-us-east-1.s3.us-east-1.amazonaws.com/${{
             needs.Assets-FileAsset1.outputs.asset-hash }}.json
           no-fail-on-empty-changeset: "1"
-          role-arn: arn:aws:iam::268591637005:role/cdk-hnb659fds-cfn-exec-role-268591637005-us-east-1
-  prodWave-stage-CloudFrontDistribution-Deploy:
-    name: Deploy ghpipelinestageCloudFrontDistribution96633926
-    if: github.ref == 'refs/heads/stage'
+          role-arn: arn:aws:iam::277707141071:role/cdk-hnb659fds-cfn-exec-role-277707141071-us-east-1
+  prodWave-prod-CloudFrontDistribution-Deploy:
+    name: Deploy ghpipelineprodCloudFrontDistribution3B7AAA0C
+    if: github.ref == 'refs/heads/prod'
     permissions:
       contents: read
       id-token: write
@@ -152,13 +152,13 @@ jobs:
           aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ env.AWS_SESSION_TOKEN }}
-          role-to-assume: arn:aws:iam::277707141071:role/cdk-hnb659fds-deploy-role-277707141071-us-east-1
+          role-to-assume: arn:aws:iam::268591637005:role/cdk-hnb659fds-deploy-role-268591637005-us-east-1
           role-external-id: Pipeline
       - id: Deploy
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: stage-CloudFrontDistribution
-          template: https://cdk-hnb659fds-assets-277707141071-us-east-1.s3.us-east-1.amazonaws.com/${{
+          name: prod-CloudFrontDistribution
+          template: https://cdk-hnb659fds-assets-268591637005-us-east-1.s3.us-east-1.amazonaws.com/${{
             needs.Assets-FileAsset2.outputs.asset-hash }}.json
           no-fail-on-empty-changeset: "1"
-          role-arn: arn:aws:iam::277707141071:role/cdk-hnb659fds-cfn-exec-role-277707141071-us-east-1
+          role-arn: arn:aws:iam::268591637005:role/cdk-hnb659fds-cfn-exec-role-268591637005-us-east-1
