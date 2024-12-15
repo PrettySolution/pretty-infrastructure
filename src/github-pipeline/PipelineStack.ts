@@ -3,7 +3,7 @@ import { ShellStep } from 'aws-cdk-lib/pipelines';
 import { AwsCredentials, GitHubWorkflow } from 'cdk-pipelines-github';
 import { Construct } from 'constructs';
 import { MyAppStage } from './MyAppStage';
-import { GH_SUPPORT_DEPLOY_ROLE_NAME, PRIMARY_REGION, PROD_ACCOUNT } from '../constants';
+import { GH_SUPPORT_DEPLOY_ROLE_NAME, PRIMARY_REGION, PROD_ACCOUNT, STAGE_ACCOUNT } from '../constants';
 
 
 export class PipelineStack extends Stack {
@@ -30,8 +30,19 @@ export class PipelineStack extends Stack {
       },
     });
 
+    const stage = new MyAppStage(this, 'stage', {
+      env: {
+        account: STAGE_ACCOUNT,
+        region: PRIMARY_REGION,
+        domainName: 'stage.pretty-solution.com',
+      },
+    });
+
     pipeline.addStageWithGitHubOptions(prod, {
       jobSettings: { if: 'github.ref == \'refs/heads/main\'' },
+    });
+    pipeline.addStageWithGitHubOptions(stage, {
+      jobSettings: { if: 'github.ref == \'refs/heads/stage\'' },
     });
   }
 }
