@@ -1,6 +1,6 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { ShellStep } from 'aws-cdk-lib/pipelines';
-import { AwsCredentials, GitHubWorkflow } from 'cdk-pipelines-github';
+import { AwsCredentials, GitHubWorkflow, JsonPatch } from 'cdk-pipelines-github';
 import { Construct } from 'constructs';
 import { MyAppStage } from './MyAppStage';
 import { GH_SUPPORT_DEPLOY_ROLE_NAME, PRIMARY_REGION, PROD_ACCOUNT, STAGE_ACCOUNT } from '../constants';
@@ -11,6 +11,7 @@ export class PipelineStack extends Stack {
     super(scope, id, props);
 
     const pipeline = new GitHubWorkflow(this, 'pipeline', {
+
       synth: new ShellStep('Build', {
         commands: [
           'yarn install',
@@ -44,5 +45,7 @@ export class PipelineStack extends Stack {
     pipeline.addStageWithGitHubOptions(stage, {
       jobSettings: { if: 'github.ref == \'refs/heads/stage\'' },
     });
+
+    pipeline.workflowFile.patch(JsonPatch.add('/on/push/branches/', 'stage'));
   }
 }
