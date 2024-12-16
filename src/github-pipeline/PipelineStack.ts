@@ -43,6 +43,7 @@ export class PipelineStack extends Stack {
         gitHubActionRoleArn: `arn:aws:iam::${PROD_ACCOUNT}:role/${GH_SUPPORT_DEPLOY_ROLE_NAME}`,
       }),
       workflowPath: '.github/workflows/deploy-prod.yml',
+      workflowName: 'deploy-prod',
       workflowTriggers: { push: { branches: ['prod'] } },
     });
     const prod = new MyAppStage(this, 'prod', {
