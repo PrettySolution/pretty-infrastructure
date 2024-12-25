@@ -13,8 +13,8 @@ export class GitHubSupportStack extends Stack {
     new GitHubActionRole(this, 'DeployRole', {
       roleName: `${GH_SUPPORT_DEPLOY_ROLE_NAME}`,
       repos: [
-        'pretty-solution/advanced-aws-cdk',
-        'pretty-solution/pretty-solution-website',
+        'prettysolution/pretty-infrastructure',
+        'prettysolution/pretty-website',
       ],
     });
 
