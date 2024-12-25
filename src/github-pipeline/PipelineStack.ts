@@ -26,7 +26,7 @@ export class PipelineStack extends Stack {
       env: {
         account: STAGE_ACCOUNT,
         region: PRIMARY_REGION,
-        domainName: 'stage.pretty-solution.com',
+        domainName: 'stage.prettysolution.com',
       },
     });
     stagePipeline.addStageWithGitHubOptions(stage);
@@ -50,7 +50,7 @@ export class PipelineStack extends Stack {
       env: {
         account: PROD_ACCOUNT,
         region: PRIMARY_REGION,
-        domainName: 'pretty-solution.com',
+        domainName: 'prettysolution.com',
       },
     });
     prodPipeline.addStageWithGitHubOptions(prod);
