@@ -13,9 +13,10 @@ export class GitHubSupportStack extends Stack {
     new GitHubActionRole(this, 'DeployRole', {
       roleName: `${GH_SUPPORT_DEPLOY_ROLE_NAME}`,
       repos: [
-        'prettysolution/*',
-        // 'prettysolution/pretty-infrastructure',
-        // 'prettysolution/pretty-website',
+        // 'prettysolution/*', did not work
+        'prettysolution/pretty-infrastructure',
+        'prettysolution/driver-infrastructure',
+        'prettysolution/pretty-website',
       ],
     });
 
