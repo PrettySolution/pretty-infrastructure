@@ -7,14 +7,14 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   name: 'advanced-aws-cdk',
   projenrcTs: true,
   gitignore: ['.idea'],
-  githubOptions: {
-    projenCredentials: GithubCredentials.fromApp(),
-  },
+  githubOptions: { projenCredentials: GithubCredentials.fromApp() },
   release: false,
-  deps: ['cdk-pipelines-github', 'aws-cdk-github-oidc'], /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  devDeps: ['cdk-dia'], /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+
+  deps: ['cdk-pipelines-github', 'aws-cdk-github-oidc'],
+  devDeps: ['cdk-dia'],
+
+  autoApproveOptions: { allowedUsernames: ['prettysolution[bot]'], secret: 'PR_AUTO_APPROVE' },
+  autoApproveUpgrades: true,
 });
 
 const baseAppCommand: string =
