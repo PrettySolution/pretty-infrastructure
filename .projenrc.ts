@@ -2,7 +2,7 @@ import { awscdk } from 'projen';
 import { GithubCredentials } from 'projen/lib/github';
 
 const project = new awscdk.AwsCdkTypeScriptApp({
-  cdkVersion: '2.171.1',
+  cdkVersion: '2.174.0',
   defaultReleaseBranch: 'main',
   name: 'advanced-aws-cdk',
   projenrcTs: true,
