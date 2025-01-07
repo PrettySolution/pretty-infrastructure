@@ -30,7 +30,7 @@
     "@types/node": "^22.10.5",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
-    "aws-cdk": "^2.171.1",
+    "aws-cdk": "^2.174.0",
     "cdk-dia": "^0.11.0",
     "esbuild": "^0.24.2",
     "eslint": "^9",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "aws-cdk-github-oidc": "^2.4.1",
-    "aws-cdk-lib": "^2.171.1",
+    "aws-cdk-lib": "^2.174.0",
     "cdk-pipelines-github": "^0.4.128",
     "constructs": "^10.0.5"
   },
