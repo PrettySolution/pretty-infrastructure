@@ -2,6 +2,7 @@ import { GitHubStage, GitHubStageProps } from 'cdk-pipelines-github';
 import { Construct } from 'constructs';
 import { ThisEnvironment } from '../interfaces';
 import { CloudFrontDistributionStack } from '../stacks/CloudFrontDistributionStack';
+import { SESStack } from '../stacks/core/SESStack';
 // import { WebSiteStack } from '../stacks/WebSiteStack';
 
 
@@ -12,6 +13,8 @@ interface MyAppStageProps extends GitHubStageProps {
 export class MyAppStage extends GitHubStage {
   constructor(scope: Construct, id: string, props: MyAppStageProps) {
     super(scope, id, props);
+
+    // new SESStack(this, 'SESStack', { env: props.env });
 
     new CloudFrontDistributionStack(this, 'CloudFrontDistribution', {
       env: props.env,
