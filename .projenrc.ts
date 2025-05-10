@@ -9,6 +9,12 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   gitignore: ['.idea'],
   githubOptions: { projenCredentials: GithubCredentials.fromApp() },
   release: false,
+  tsconfig: {
+    compilerOptions: {
+      noUnusedLocals: false,
+      noUnusedParameters: false,
+    },
+  },
 
   deps: ['cdk-pipelines-github', 'aws-cdk-github-oidc'],
   devDeps: ['cdk-dia'],
