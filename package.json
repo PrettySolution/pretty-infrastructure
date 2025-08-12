@@ -46,7 +46,7 @@
   "dependencies": {
     "aws-cdk-github-oidc": "^2.4.1",
     "aws-cdk-lib": "^2.174.0",
-    "cdk-pipelines-github": "^0.4.130",
+    "cdk-pipelines-github": "^0.4.131",
     "constructs": "^10.0.5"
   },
   "license": "Apache-2.0",
