@@ -6,7 +6,7 @@ junit.xml
 permissions-backup.acl
 /.mergify.yml
 /test/
-/tsconfig.dev.json
+/test/tsconfig.json
 /src/
 !/lib/
 !/lib/**/*.js
@@ -19,6 +19,7 @@ dist
 /.projenrc.js
 tsconfig.tsbuildinfo
 /.eslintrc.json
+/projenrc/tsconfig.json
 !/assets/
 cdk.out/
 .cdk.staging/
